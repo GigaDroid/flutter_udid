@@ -8,7 +8,7 @@ Plugin for getting a persistent UDID accross app reinstalls on iOS and Android.
 
 ```
 import 'package:flutter_udid/flutter_udid.dart';
-String udid = await FlutterUdid.udid;]
+String udid = await FlutterUdid.udid;
 ```
 
 This provides a UDID for both iOS and Android using the format corresponding platform.
@@ -22,7 +22,7 @@ To get a consistent formatting on both platforms use:
 
 ```
 import 'package:flutter_udid/flutter_udid.dart';
-String udid = await FlutterUdid.consistenUdid;]
+String udid = await FlutterUdid.consistentUdid;
 ```
 
 This will result in a UDID in the following format:     
