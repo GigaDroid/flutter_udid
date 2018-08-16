@@ -7,6 +7,7 @@ homepage: https://github.com/GigaDroid/flutter_udid
 dependencies:
   flutter:
     sdk: flutter
+  crypto: ^2.0.6
 
 
 environment:
