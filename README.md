@@ -12,8 +12,11 @@ String udid = await FlutterUdid.udid;]
 ```
 
 This provides a UDID for both iOS and Android using the format corresponding platform.
-Android: `8af8770a27cfd182`
-iOS: `7946DA4E-8429-423C-B405-B3FC77914E3E`
+
+| Platform | Format |
+| ------------- | ------------- |
+| iOS     | `7946DA4E-8429-423C-B405-B3FC77914E3E` | 
+| Android | `8af8770a27cfd182` |
 
 To get a consistent formatting on both platforms use:
 
@@ -22,7 +25,7 @@ import 'package:flutter_udid/flutter_udid.dart';
 String udid = await FlutterUdid.consistenUdid;]
 ```
 
-This will result in a UDID in the following format:
+This will result in a UDID in the following format:     
 `25FD859320F9C05F85243B18EB1D31D4FA88A591023F84AC26CE4F8170A3BBFC`
 
 
