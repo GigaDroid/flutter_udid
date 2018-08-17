@@ -2,7 +2,7 @@
 
 [![pub package](https://img.shields.io/pub/v/flutter_udid.svg)](https://pub.dartlang.org/packages/flutter_udid)
 
-Plugin for getting a persistent UDID accross app reinstalls on iOS and Android.
+Plugin for getting a persistent UDID across app reinstalls on iOS and Android.
 
 ## Getting Started
 
@@ -11,7 +11,7 @@ import 'package:flutter_udid/flutter_udid.dart';
 String udid = await FlutterUdid.udid;
 ```
 
-This provides an UDID for both iOS and Android using the format corresponding platform.
+This provides an UDID for both iOS and Android using the format of the corresponding platform.
 
 | Platform | Format |
 | ------------- | ------------- |
