@@ -26,7 +26,7 @@ String udid = await FlutterUdid.consistentUdid;
 ```
 
 This will result in an UDID of the following format:     
-`25FD859320F9C05F85243B18EB1D31D4FA88A591023F84AC26CE4F8170A3BBFC`
+`984725b6c4f55963cc52fca0f943f9a8060b1c71900d542c79669b6dc718a64b`
 
 
 The UDID can change after a factory reset!
