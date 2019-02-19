@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Update Gradle and Kotlin plugins
+
 ## 0.0.3
 
 * Minor reformatting
