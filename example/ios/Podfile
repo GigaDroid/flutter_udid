@@ -46,7 +46,7 @@ target 'Runner' do
       pod 'Flutter', :path => File.join(symlink, File.basename(p[:path]))
     end
   }
-
+  pod 'SAMKeychain'
   # Plugin Pods
   plugin_pods = parse_KV_file('../.flutter-plugins')
   plugin_pods.map { |p|
