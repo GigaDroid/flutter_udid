@@ -1,3 +1,8 @@
+## 1.0.1
+
+* Migrate to AndroidX
+* Specify Swift version in podspec
+
 ## 1.0.0
 
 * Update Gradle and Kotlin plugins
