@@ -19,9 +19,14 @@
     <content url="file://$MODULE_DIR$/android">
       <sourceFolder url="file://$MODULE_DIR$/android/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/android/gen" isTestSource="false" generated="true" />
+      <excludeFolder url="file://$MODULE_DIR$/android/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/android/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/android/build" />
     </content>
     <content url="file://$MODULE_DIR$/example/android">
       <sourceFolder url="file://$MODULE_DIR$/example/android/app/src/main/java" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/example/android/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/example/android/.idea" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
