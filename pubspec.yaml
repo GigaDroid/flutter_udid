@@ -19,8 +19,12 @@ environment:
 # The following section is specific to Flutter.
 flutter:
   plugin:
-    androidPackage: de.gigadroid.flutterudid
-    pluginClass: FlutterUdidPlugin
+    platforms:
+      android:
+        package: de.gigadroid.flutterudid
+        pluginClass: FlutterUdidPlugin
+      ios:
+        pluginClass: FlutterUdidPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
