@@ -1,4 +1,4 @@
-## 1.1
+## 1.1.0
 
 * Increase environment constraints
 * Migrate to new Android flutter embedding and plugin binding
