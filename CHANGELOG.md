@@ -1,3 +1,12 @@
+## 1.1
+
+* Increase environment constraints
+* Migrate to new Android flutter embedding and plugin binding
+* Regenerate Podfile
+* Update crypto dependency to 3.0.0
+* Enable AndroidX for example app
+* Use new platform specification
+
 ## 1.0.1
 
 * Migrate to AndroidX
