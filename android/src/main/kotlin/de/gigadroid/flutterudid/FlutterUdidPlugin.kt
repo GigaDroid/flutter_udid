@@ -1,30 +1,47 @@
 package de.gigadroid.flutterudid
 
+import androidx.annotation.NonNull
 import android.annotation.SuppressLint
 import android.provider.Settings
+import android.content.Context
+
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.PluginRegistry.Registrar
 import io.flutter.plugin.common.PluginRegistry
+import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.plugin.common.EventChannel
+import io.flutter.plugin.common.BinaryMessenger
 
+class FlutterUdidPlugin() : MethodCallHandler, FlutterPlugin {
 
+  private lateinit var channel : MethodChannel
+  private var applicationContext: Context? = null
 
-class FlutterUdidPlugin(private val registrar: PluginRegistry.Registrar) : MethodCallHandler {
   companion object {
     @JvmStatic
     fun registerWith(registrar: Registrar): Unit {
-      val channel = MethodChannel(registrar.messenger(), "flutter_udid")
-      val instance = FlutterUdidPlugin(registrar)
-      channel.setMethodCallHandler(instance)
+      val instance = FlutterUdidPlugin()
+      instance.onAttachedToEngine(registrar.context(), registrar.messenger())
     }
   }
 
-  override fun onMethodCall(call: MethodCall, result: Result): Unit {
+  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+    onAttachedToEngine(flutterPluginBinding.getApplicationContext(), flutterPluginBinding.getBinaryMessenger());
+  }
+
+  private fun onAttachedToEngine(applicationContext : Context, messenger: BinaryMessenger) {
+    this.applicationContext = applicationContext;
+    val methodChannel = MethodChannel(messenger, "flutter_udid")
+    methodChannel.setMethodCallHandler(this)
+  }
+
+  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     if(call.method == "getUDID"){
       val udid = getUDID()
-      if(udid == ""){
+      if(udid == null || udid == ""){
         result.error("UNAVAILABLE", "UDID not available.", null)
       }else{
         result.success(udid)
@@ -34,8 +51,13 @@ class FlutterUdidPlugin(private val registrar: PluginRegistry.Registrar) : Metho
     }
   }
 
+  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+    applicationContext = null;
+    channel.setMethodCallHandler(null)
+  }
+
   private fun getUDID() : String{
-    return Settings.Secure.getString(registrar.context().contentResolver, Settings.Secure.ANDROID_ID)
+    return Settings.Secure.getString(applicationContext?.contentResolver, Settings.Secure.ANDROID_ID)
   }
 }
 
