@@ -20,9 +20,11 @@ flutter:
   plugin:
     platforms:
       android:
-        package: de.gigadroid.flutterudid
+        package: de.gigadroid.flutter_udid
         pluginClass: FlutterUdidPlugin
       ios:
+        pluginClass: FlutterUdidPlugin
+      macos:
         pluginClass: FlutterUdidPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
