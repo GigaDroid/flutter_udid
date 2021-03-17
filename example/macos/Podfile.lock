@@ -1,0 +1,29 @@
+PODS:
+  - flutter_udid (0.0.1):
+    - FlutterMacOS
+    - SAMKeychain
+  - FlutterMacOS (1.0.0)
+  - SAMKeychain (1.5.3)
+
+DEPENDENCIES:
+  - flutter_udid (from `Flutter/ephemeral/.symlinks/plugins/flutter_udid/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+
+SPEC REPOS:
+  trunk:
+    - SAMKeychain
+
+EXTERNAL SOURCES:
+  flutter_udid:
+    :path: Flutter/ephemeral/.symlinks/plugins/flutter_udid/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+
+SPEC CHECKSUMS:
+  flutter_udid: 6b2b89780c3dfeecf0047bdf93f622d6416b1c07
+  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
+
+PODFILE CHECKSUM: 6eac6b3292e5142cfc23bdeb71848a40ec51c14c
+
+COCOAPODS: 1.10.0

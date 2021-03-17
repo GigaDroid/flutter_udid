@@ -1,4 +1,4 @@
-package de.gigadroid.flutterudid
+package de.gigadroid.flutter_udid
 
 import androidx.annotation.NonNull
 import android.annotation.SuppressLint
