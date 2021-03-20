@@ -1,3 +1,8 @@
+## 1.2.0
+
+* Add MacOS support
+* Fix Android crash
+
 ## 1.1.0
 
 * Increase environment constraints
