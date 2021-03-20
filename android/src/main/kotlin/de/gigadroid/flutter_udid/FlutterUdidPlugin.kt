@@ -34,8 +34,8 @@ class FlutterUdidPlugin() : MethodCallHandler, FlutterPlugin {
 
   private fun onAttachedToEngine(applicationContext : Context, messenger: BinaryMessenger) {
     this.applicationContext = applicationContext;
-    val methodChannel = MethodChannel(messenger, "flutter_udid")
-    methodChannel.setMethodCallHandler(this)
+    channel = MethodChannel(messenger, "flutter_udid")
+    channel.setMethodCallHandler(this)
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
