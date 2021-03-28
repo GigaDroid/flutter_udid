@@ -1,3 +1,6 @@
+## 2.0.0
+* Support null-safety
+
 ## 1.2.0
 
 * Add MacOS support
