@@ -1,3 +1,6 @@
+## 2.0.1
+* Increase Gradle, Kotlin and compileSdk version
+
 ## 2.0.0
 * Support null-safety
 
