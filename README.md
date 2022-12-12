@@ -32,6 +32,7 @@ This will result in an UDID of the following format:
 The UDID can change after a factory reset!
 Additionally if a device has been updated to Android 8.0 through an OTA and the app is reinstalled the UDID may change as well due to security changes in Android 8.0.
 On rooted and jailbroken devices the ID can be changed, so please take this into account. However it should not be possible to identify as another already existing user through random guessing because of the complexity of the ID.
+Other than that, the UUID can also change if the app signing signature changes in case of both IOS and Android. So make sure you sign your app using the same digital signature.
 
 For help getting started with Flutter, view the online
 [documentation](https://flutter.io/).
