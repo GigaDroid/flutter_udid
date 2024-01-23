@@ -1,3 +1,7 @@
+## 2.1.0
+* Increase minimum flutter version to 3.10.0
+* Cleanup and update gradle files and iOS classes
+
 ## 2.0.1
 * Increase Gradle, Kotlin and compileSdk version
 
