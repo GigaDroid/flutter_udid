@@ -3,6 +3,10 @@ description: Plugin to retrieve a persistent UDID across reinstalls on iOS and A
 version: 2.1.0
 homepage: https://github.com/GigaDroid/flutter_udid
 
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
 dependencies:
   flutter:
     sdk: flutter
@@ -11,11 +15,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^3.0.0
 
-
-environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=2.0.0"
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 

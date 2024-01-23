@@ -11,4 +11,4 @@ PRODUCT_NAME = flutter_udid_example
 PRODUCT_BUNDLE_IDENTIFIER = de.gigadroid.flutterUdidExample
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2021 de.gigadroid. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 de.gigadroid. All rights reserved.
