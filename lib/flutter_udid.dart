@@ -6,7 +6,7 @@ import 'dart:convert';
 /// API to retrieve a unique device ID of the device the Flutter
 /// app is currently running on.
 class FlutterUdid {
-  static const MethodChannel _channel = const MethodChannel('flutter_udid');
+  static const MethodChannel _channel = MethodChannel('flutter_udid');
 
   /// Returns the UDID in the platform-specific format.
   /// iOS: 7946DA4E-8429-423C-B405-B3FC77914E3E,
