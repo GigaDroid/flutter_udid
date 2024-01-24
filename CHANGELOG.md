@@ -1,3 +1,6 @@
+## 2.1.1
+* Remove namespace from AndroidManifest.xml
+
 ## 2.1.0
 * Increase minimum flutter version to 3.10.0
 * Cleanup and update gradle files and iOS classes
