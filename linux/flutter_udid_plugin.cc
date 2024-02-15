@@ -25,9 +25,21 @@ static void flutter_udid_plugin_handle_method_call(
   g_autoptr(FlMethodResponse) response = nullptr;
 
   const gchar* method = fl_method_call_get_name(method_call);
-
-  if (strcmp(method, "getPlatformVersion") == 0) {
-    response = get_platform_version();
+  // Inspired from: https://github.com/BestBurning/platform_device_id
+  if (strcmp(method, "getUDID") == 0) {
+    FILE *rstream = NULL;
+    char buf[1024] = {0};
+    rstream = popen("dmidecode -s system-uuid","r");
+    fread(buf, sizeof(char), sizeof(buf), rstream);
+    pclose(rstream);
+    if(buf[0] == 0) {
+      rstream = popen("cat /etc/machine-id", "r");
+      fread(buf, sizeof(char), sizeof(buf), rstream);
+      pclose(rstream);
+    }
+    g_autofree gchar *deviceId = g_strdup_printf("%s", buf);
+    g_autoptr(FlValue) result = fl_value_new_string(deviceId);
+    response = FL_METHOD_RESPONSE(fl_method_success_response_new(result));
   } else {
     response = FL_METHOD_RESPONSE(fl_method_not_implemented_response_new());
   }
