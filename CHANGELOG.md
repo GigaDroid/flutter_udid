@@ -1,3 +1,6 @@
+## 3.0.0
+* Add Windows and Linux support
+
 ## 2.1.1
 * Remove namespace from AndroidManifest.xml
 
