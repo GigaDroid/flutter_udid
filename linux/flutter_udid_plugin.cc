@@ -25,16 +25,9 @@ static void flutter_udid_plugin_handle_method_call(
   g_autoptr(FlMethodResponse) response = nullptr;
 
   const gchar* method = fl_method_call_get_name(method_call);
-  // Inspired from: https://github.com/BestBurning/platform_device_id
   if (strcmp(method, "getUDID") == 0) {
     FILE *rstream = NULL;
     char buf[1024] = {0};
-    /*
-    // fix: linux permission denied, use /etc/machine-id
-    rstream = popen("dmidecode -s system-uuid","r");
-    fread(buf, sizeof(char), sizeof(buf), rstream);
-    pclose(rstream);
-    */
     if(buf[0] == 0) {
       rstream = popen("cat /etc/machine-id", "r");
       fread(buf, sizeof(char), sizeof(buf), rstream);
