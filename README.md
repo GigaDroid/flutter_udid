@@ -13,13 +13,13 @@ String udid = await FlutterUdid.udid;
 
 This provides an UDID using the format of the corresponding platform.
 
-| Platform | Format                                 | Source                                                                                                                                      |
-|----------|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Platform | Format                                 | Source                                                                                                                                          |
+|----------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | iOS      | `7946DA4E-8429-423C-B405-B3FC77914E3E` | [identifierForVendor (saved to Keychain for persistence)](https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor) |
-| Android  | `8af8770a27cfd182`                     | [Settings.Secure.ANDROID_ID](https://developer.android.com/reference/android/provider/Settings.Secure#ANDROID_ID)                           |
-| Mac      | `707E990C-D002-520B-ABA6-4216C6D514BF` | [kIOPlatformUUIDKey](https://developer.apple.com/documentation/iokit/kioplatformuuidkey)                                                    |
-| Windows  | `99A4D301-53F5-11CB-8CA0-9CA39A9E1F01` | BIOS UUID                                                                                                                                   |
-| Linux    | `1124435e065241dcae2241e9caab9a6c` | Machine Id                                                                                                                                    |
+| Android  | `8af8770a27cfd182`                     | [Settings.Secure.ANDROID_ID](https://developer.android.com/reference/android/provider/Settings.Secure#ANDROID_ID)                               |
+| Mac      | `707E990C-D002-520B-ABA6-4216C6D514BF` | [kIOPlatformUUIDKey](https://developer.apple.com/documentation/iokit/kioplatformuuidkey)                                                        |
+| Windows  | `99A4D301-53F5-11CB-8CA0-9CA39A9E1F01` | BIOS UUID                                                                                                                                       |
+| Linux    | `1124435e065241dcae2241e9caab9a6c` | Machine ID                                                                                                                                      |
 
 To get a consistent formatting on all platforms use:
 
