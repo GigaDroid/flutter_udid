@@ -1,3 +1,6 @@
+## 3.0.1
+* Linux use machine Id
+
 ## 3.0.0
 * Add Windows and Linux support
 

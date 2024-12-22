@@ -19,7 +19,7 @@ This provides an UDID using the format of the corresponding platform.
 | Android  | `8af8770a27cfd182`                     | [Settings.Secure.ANDROID_ID](https://developer.android.com/reference/android/provider/Settings.Secure#ANDROID_ID)                           |
 | Mac      | `707E990C-D002-520B-ABA6-4216C6D514BF` | [kIOPlatformUUIDKey](https://developer.apple.com/documentation/iokit/kioplatformuuidkey)                                                    |
 | Windows  | `99A4D301-53F5-11CB-8CA0-9CA39A9E1F01` | BIOS UUID                                                                                                                                   |
-| Linux    | `32a70060-2a39-437e-88e2-d68e6154de9f` | BIOS UUID                                                                                                                                   |
+| Linux    | `1124435e065241dcae2241e9caab9a6c` | Machine Id                                                                                                                                    |
 
 To get a consistent formatting on all platforms use:
 
