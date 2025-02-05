@@ -1,6 +1,6 @@
 import Cocoa
 import FlutterMacOS
-import SAMKeychain
+// import SAMKeychain
 import IOKit
 
 public class FlutterUdidPlugin: NSObject, FlutterPlugin {
@@ -20,6 +20,9 @@ public class FlutterUdidPlugin: NSObject, FlutterPlugin {
   }
 
   private func getUniqueDeviceIdentifierAsString(result: FlutterResult) {
+/*
+  // fix: warning: 'archivedDataWithRootObject:' is deprecated: first deprecated in macOS 10.14 - Use +archivedDataWithRootObject:requiringSecureCoding:error: instead [-Wdeprecated-declarations]
+
           let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as! String
           let accountName = Bundle.main.bundleIdentifier!
 
@@ -40,11 +43,12 @@ public class FlutterUdidPlugin: NSObject, FlutterPlugin {
                   print("SAMKeychainQuery Exception: \(error)")
               }
           }
-
+  */
+        let applicationUUID = self.hardwareUUID()
           if(applicationUUID==nil||applicationUUID==""){
               result(FlutterError.init(code: "UNAVAILABLE",
-                                       message: "UDID not available",
-                                       details: nil));
+                                      message: "UDID not available",
+                                      details: nil));
           }else{
               result(applicationUUID)
           }
