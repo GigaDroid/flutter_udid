@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
   name: "flutter_udid",
   platforms: [
-    .macOS("10.14")
+    .macOS("10.15")
   ],
   products: [
     .library(name: "flutter-udid", targets: ["flutter_udid"])

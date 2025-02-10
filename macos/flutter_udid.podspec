@@ -15,8 +15,7 @@ A new flutter plugin project.
   s.source           = { :path => '.' }
   s.source_files     = 'flutter_udid/Sources/flutter_udid/**/*.swift'
   s.dependency 'FlutterMacOS'
-  s.dependency 'SAMKeychain'
-  s.platform = :osx, '10.11'
+  s.platform = :osx, '10.15'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.swift_version = '5.0'
 end
