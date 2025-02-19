@@ -20,6 +20,8 @@ set(PLUGIN_NAME "flutter_udid_plugin")
 list(APPEND PLUGIN_SOURCES
   "flutter_udid_plugin.cpp"
   "flutter_udid_plugin.h"
+  "wmi_utils.cpp"
+  "wmi_utils.h"  
 )
 
 # Define the plugin library target. Its name must not be changed (see comment

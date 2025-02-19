@@ -8,8 +8,14 @@
 #include <memory>
 #include <sstream>
 
+#include "wmi_utils.h"
+
 namespace flutter_udid
 {
+
+  // global cache
+  std::string deviceId = "";
+
   // static
   void FlutterUdidPlugin::RegisterWithRegistrar(
       flutter::PluginRegistrarWindows *registrar)
@@ -40,35 +46,58 @@ namespace flutter_udid
   {
     if (method_call.method_name().compare("getUDID") == 0)
     {
-      // Inspired by https://github.com/BestBurning/platform_device_id
-      char buf[1024] = {0};
-      FILE *rstream = _popen("wmic csproduct get UUID", "r");
-
-      if (rstream == NULL)
-      {
-        result->Error("UNABLE_TO_OPEN_STREAM", "Unable to open stream for wmic command");
-        return;
+      if(! deviceId.empty()){ // return cached deviceId if available
+        return result->Success(flutter::EncodableValue(deviceId));
       }
+        bool wmicPreInstalled = WmiUtils::wmicPreInstalled();
+        // bool wmicPreInstalled = false;  // test       
+        if (!wmicPreInstalled){
+        // Inspired by https://github.com/BestBurning/platform_device_id
+        char buf[1024] = {0};
+        FILE *rstream = _popen("wmic csproduct get UUID", "r");
+        if (rstream == NULL)
+        {
+          result->Error("UNABLE_TO_OPEN_STREAM", "Unable to open stream for wmic command");
+          return;
+        }
 
-      size_t bytesRead = fread(buf, sizeof(char), sizeof(buf), rstream);
-      _pclose(rstream);
+        size_t bytesRead = fread(buf, sizeof(char), sizeof(buf), rstream);
+        _pclose(rstream);
+        if (bytesRead == 0)
+        {
+          result->Error("NO_DATA_READ", "No data read from wmic command");
+          return;
+        }
 
-      if (bytesRead == 0)
-      {
-        result->Error("NO_DATA_READ", "No data read from wmic command");
-        return;
+        std::string deviceIdResult = buf;
+        std::size_t pos = deviceIdResult.find("\n");
+        if (pos == std::string::npos)
+        {
+          result->Error("INVALID_UUID_FORMAT", "UUID format is invalid");
+          return;
+        }
+        deviceId = deviceIdResult.substr(pos + 1);
+
+      }else{
+        // ref, https://github.com/huanguan1978/wmi
+
+        std::string serveName = "ROOT\\CIMV2";
+        std::string tableName = "Win32_ComputerSystemProduct";;
+        std::string fieldName = "UUID";
+
+        bool initialized = WmiUtils::wmiInit(serveName);
+        if (!initialized){
+          result->Error("UNABLE_TO_INIT_WMI", "Unable to initialize WMI");
+          return;
+        }
+
+        std::wstring uuid = WmiUtils::wmiValue(tableName, fieldName);
+        if (uuid.empty()){
+          result->Error("NO_DATA_READ", "No data read from wmi instance");
+          return;
+        }      
+        deviceId = WmiUtils::wstring_to_string(uuid);
       }
-
-      std::string deviceIdResult = buf;
-      std::size_t pos = deviceIdResult.find("\n");
-
-      if (pos == std::string::npos)
-      {
-        result->Error("INVALID_UUID_FORMAT", "UUID format is invalid");
-        return;
-      }
-
-      std::string deviceId = deviceIdResult.substr(pos + 1);
       result->Success(flutter::EncodableValue(deviceId));
     }
     else
@@ -76,5 +105,7 @@ namespace flutter_udid
       result->NotImplemented();
     }
   }
+
+  
 
 } // namespace flutter_udid
