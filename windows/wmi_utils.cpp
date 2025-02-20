@@ -5,9 +5,6 @@
 // for example, get the UUID of the system
 int main() {
 
-    bool wmicPreInstalled = WmiUtils::wmicPreInstalled();
-    std::cout << "wmicPreInstalled:" << (wmicPreInstalled ? "Yes" : "No") <<  std::endl;
-
     std::string serveName = "ROOT\\CIMV2";
     bool initialized = WmiUtils::wmiInit(serveName);
 
@@ -85,18 +82,24 @@ HRESULT _init(IWbemServices **pSvc1, IWbemLocator **pLoc1, std::string serveName
 
     // Step 1: --------------------------------------------------
     // Initialize COM. ------------------------------------------
-    hres = CoInitializeEx(0, COINIT_MULTITHREADED);
+    hres = CoInitializeEx(0, COINIT_APARTMENTTHREADED); // COINIT_MULTITHREADED
     if (FAILED(hres))
     {
+        std::cerr << "Failed to initialize COM library. Error code = 0x" << std::hex << hres << std::endl;
+        return hres;
     }
 
     // Step 2: --------------------------------------------------
     // Set general COM security levels --------------------------
     hres = CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_DEFAULT,
                                 RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE, NULL);
-    if (FAILED(hres))
+
+    if (SUCCEEDED(hres) || RPC_E_TOO_LATE == hres)
     {
-        std::cerr << "Failed to initialize security." << std::endl;
+    }
+    else
+    {
+        std::cerr << "Failed to initialize security. Error code = 0x" << std::hex << hres << std::endl;
         CoUninitialize();
         return hres;
     }
@@ -107,7 +110,7 @@ HRESULT _init(IWbemServices **pSvc1, IWbemLocator **pLoc1, std::string serveName
                             IID_IWbemLocator, (LPVOID *)pLoc1);
     if (FAILED(hres))
     {
-        std::cerr << "Failed to create IWbemLocator object." << std::endl;
+        std::cerr << "Failed to create IWbemLocator object. Error code = 0x" << std::hex << hres << std::endl;
         CoUninitialize();
         return hres;
     }
@@ -118,7 +121,7 @@ HRESULT _init(IWbemServices **pSvc1, IWbemLocator **pLoc1, std::string serveName
     hres = (*pLoc1)->ConnectServer(bstrServeName, NULL, NULL, 0, NULL, 0, 0, pSvc1);
     if (FAILED(hres))
     {
-        std::cerr << "Failed to connect to WMI." << std::endl;
+        std::cerr << "Failed to connect to WMI. Error code = 0x" << std::hex << hres << std::endl;
         (*pLoc1)->Release();
         CoUninitialize();
         return hres;
@@ -130,7 +133,7 @@ HRESULT _init(IWbemServices **pSvc1, IWbemLocator **pLoc1, std::string serveName
                              RPC_C_AUTHN_LEVEL_CALL, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE);
     if (FAILED(hres))
     {
-        std::cerr << "Failed to set proxy blanket." << std::endl;
+        std::cerr << "Failed to set proxy blanket. Error code = 0x" << std::hex << hres << std::endl;
         (*pSvc1)->Release();
         (*pLoc1)->Release();
         CoUninitialize();
@@ -160,7 +163,7 @@ std::vector<std::wstring> _exec(IWbemServices *pSvc1, std::string tableName, std
         NULL, &pEnumerator);
     if (FAILED(hres))
     {
-        std::cerr << "Query for " + tableName + " failed" << std::endl;
+        std::cerr << "Query for " + tableName + " failed. Error code = 0x" << std::hex << hres << std::endl;
         return vecValue;
     }
 
@@ -184,7 +187,7 @@ std::vector<std::wstring> _exec(IWbemServices *pSvc1, std::string tableName, std
         hres = pObj->Get(bstrFieldName, 0, &vtProp, 0, 0);
         if (FAILED(hres))
         {
-            std::cerr << "Failed to get " + bstrFieldName << std::endl;
+            std::cerr << "Failed to get " + bstrFieldName << ", Error code = 0x" << std::hex << hres << std::endl;
         }
         else
         {
@@ -221,7 +224,7 @@ std::wstring _exec2(IWbemServices *pSvc1,
                          NULL, &pEnumerator);
     if (FAILED(hres))
     {
-        std::cerr << "Query for " + tableName + " failed" << std::endl;
+        std::cerr << "Query for " + tableName + " failed, Error code = 0x" << std::hex << hres << std::endl;
         return L"";
     }
 
@@ -244,7 +247,7 @@ std::wstring _exec2(IWbemServices *pSvc1,
             hres = pObj->GetNames(0, WBEM_FLAG_ALWAYS, NULL, &pNames);
             if (FAILED(hres))
             {
-                std::cerr << "Failed to get property names" << std::endl;
+                std::cerr << "Failed to GetNames, Error code = 0x" << std::hex << hres << std::endl;
                 pObj->Release();
                 continue;
             }
@@ -263,7 +266,7 @@ std::wstring _exec2(IWbemServices *pSvc1,
                 hres = SafeArrayGetElement(pNames, &i, &bstrName);
                 if (FAILED(hres))
                 {
-                    std::cerr << "Failed to get property name" << std::endl;
+                    std::cerr << "Failed to SafeArrayGetElement, Error code = 0x" << std::hex << hres << std::endl;
                     continue;
                 }
 
@@ -271,7 +274,7 @@ std::wstring _exec2(IWbemServices *pSvc1,
                 hres = pObj->Get(bstrName, 0, &vtProp, 0, 0);
                 if (FAILED(hres))
                 {
-                    std::cerr << "Failed to get property value" << std::endl;
+                    std::cerr << "Failed to Get, Error code = 0x" << std::hex << hres << std::endl;
                     SysFreeString(bstrName);
                     continue;
                 }
@@ -346,11 +349,6 @@ std::wstring _exec2(IWbemServices *pSvc1,
     pEnumerator->Release();
 
     return result.str();
-}
-
-bool wmicPreInstalled()
-{
-    return !IsWindowsVersionOrGreater(10, 0, 22572);
 }
 
 bool wmiInit(std::string serveName)

@@ -1,6 +1,8 @@
 #include "flutter_udid_plugin.h"
 
 #include <windows.h>
+#include <VersionHelpers.h>
+
 #include <flutter/method_channel.h>
 #include <flutter/plugin_registrar_windows.h>
 #include <flutter/standard_method_codec.h>
@@ -15,6 +17,11 @@ namespace flutter_udid
 
   // global cache
   std::string deviceId = "";
+  
+  bool wmicPreInstalled()
+  {
+      return !IsWindowsVersionOrGreater(10, 0, 22572);
+  }
 
   // static
   void FlutterUdidPlugin::RegisterWithRegistrar(
@@ -49,9 +56,9 @@ namespace flutter_udid
       if(! deviceId.empty()){ // return cached deviceId if available
         return result->Success(flutter::EncodableValue(deviceId));
       }
-        bool wmicPreInstalled = WmiUtils::wmicPreInstalled();
-        // bool wmicPreInstalled = false;  // test       
-        if (!wmicPreInstalled){
+      bool wmicPreInstalled = flutter_udid::wmicPreInstalled();
+      // bool wmicPreInstalled = false;  // test       
+      if (wmicPreInstalled){
         // Inspired by https://github.com/BestBurning/platform_device_id
         char buf[1024] = {0};
         FILE *rstream = _popen("wmic csproduct get UUID", "r");
