@@ -56,8 +56,8 @@ namespace flutter_udid
       if(! deviceId.empty()){ // return cached deviceId if available
         return result->Success(flutter::EncodableValue(deviceId));
       }
-      bool wmicPreInstalled = flutter_udid::wmicPreInstalled();
-      // bool wmicPreInstalled = false;  // test       
+      // bool wmicPreInstalled = flutter_udid::wmicPreInstalled();
+      bool wmicPreInstalled = false;  // test       
       if (wmicPreInstalled){
         // Inspired by https://github.com/BestBurning/platform_device_id
         char buf[1024] = {0};
