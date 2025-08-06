@@ -14,7 +14,7 @@ Plugin for getting a persistent UDID on iOS and Android
   s.source           = { :path => '.' }
   s.source_files = 'flutter_udid/Sources/flutter_udid/**/*.swift'
   s.dependency 'Flutter'
-  s.dependency 'SAMKeychain'
+  s.dependency 'KeychainAccess'
   s.platform = :ios, '11.0'
 
   # Flutter.framework does not contain a i386 slice.
