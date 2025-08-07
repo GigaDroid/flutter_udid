@@ -1,6 +1,7 @@
 import Flutter
 import UIKit
 import KeychainAccess
+import SAMKeychain
 
 public class FlutterUdidPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
@@ -17,25 +18,27 @@ public class FlutterUdidPlugin: NSObject, FlutterPlugin {
             result(FlutterMethodNotImplemented)
         }
     }
-    
     private func getUniqueDeviceIdentifierAsString(result: FlutterResult) {
-        let vendorId = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
-        let key = "device_id_\(vendorId)"
-        
-        let keychain = Keychain(service: Bundle.main.bundleIdentifier ?? "com.default.app")
-            .synchronizable(true)
-        
-        if let uuid = try? keychain.get(key), !uuid.isEmpty {
-            result(uuid)
-            return
-        }
-        
-        do {
-            try keychain.set(vendorId, key: key)
-            result(vendorId)
-        } catch let error {
-            print("Keychain save error: \(error)")
-            result(FlutterError(code: "UNAVAILABLE", message: "Failed to save UUID", details: error.localizedDescription))
-        }
+      guard let vendorId = UIDevice.current.identifierForVendor?.uuidString else {
+        result(FlutterError(code: "UNAVAILABLE", message: "UDID not available", details: nil))
+        return
+      }
+
+      let key = "device_id_\(vendorId)"
+      let keychain = Keychain(service: Bundle.main.bundleIdentifier ?? "com.default.app")
+        .synchronizable(true)
+
+      if let uuid = try? keychain.get(key), !uuid.isEmpty {
+        result(uuid)
+        return
+      }
+
+      do {
+        try keychain.set(vendorId, key: key)
+        result(vendorId)
+      } catch let error {
+        print("Keychain save error: \(error)")
+        result(FlutterError(code: "UNAVAILABLE", message: "Failed to save UUID", details: error.localizedDescription))
+      }
     }
 }
