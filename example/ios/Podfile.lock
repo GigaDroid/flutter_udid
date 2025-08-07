@@ -2,9 +2,7 @@ PODS:
   - Flutter (1.0.0)
   - flutter_udid (0.0.1):
     - Flutter
-    - KeychainAccess
     - SAMKeychain
-  - KeychainAccess (4.2.2)
   - SAMKeychain (1.5.3)
 
 DEPENDENCIES:
@@ -13,7 +11,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - KeychainAccess
     - SAMKeychain
 
 EXTERNAL SOURCES:
@@ -24,10 +21,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_udid: 7d587decf0a974ad291fc24910ffe1dc59ed51c8
-  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  flutter_udid: a2482c67a61b9c806ef59dd82ed8d007f1b7ac04
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.14.3
