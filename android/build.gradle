@@ -29,7 +29,7 @@ android {
         namespace 'de.gigadroid.flutterudid'
     }
 
-    compileSdkVersion 36
+    compileSdkVersion flutter.compileSdkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
