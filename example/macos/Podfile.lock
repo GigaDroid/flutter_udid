@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral
 
 SPEC CHECKSUMS:
-  flutter_udid: fd62e3ffdc840933cd67808c43276fc0a40e473c
-  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+  flutter_udid: a0c0270ca9af9f3119bfb53f95813760caee4c1a
+  FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
 
 PODFILE CHECKSUM: 54ab1ae9e8d4c5e62ac1cba034ff5bb2a562d876
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
