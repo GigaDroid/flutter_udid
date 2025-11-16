@@ -1,3 +1,12 @@
+## 4.1.0
+* Replace SAMKeychain with KeychainAccess for iOS and macOS
+* Update iOS deployment target to 13.0
+* Update macOS deployment target to 10.15
+* Upgrade Gradle to 8.13 and Kotlin to 2.1.0
+* Upgrade Android compile SDK to 36
+* Fix Windows 11 wmic command not recognized error
+* Fix jcenter removal warning in Gradle v9
+
 ## 4.0.0
 * BREAKING: Linux will always use the id located at /etc/machine-id now, and not use the BIOS UUID due to permission issues
 
