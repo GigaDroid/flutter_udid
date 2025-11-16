@@ -1,11 +1,17 @@
 PODS:
   - flutter_udid (0.0.1):
     - FlutterMacOS
+    - KeychainAccess
   - FlutterMacOS (1.0.0)
+  - KeychainAccess (4.2.2)
 
 DEPENDENCIES:
   - flutter_udid (from `Flutter/ephemeral/.symlinks/plugins/flutter_udid/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
+
+SPEC REPOS:
+  trunk:
+    - KeychainAccess
 
 EXTERNAL SOURCES:
   flutter_udid:
@@ -14,8 +20,9 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral
 
 SPEC CHECKSUMS:
-  flutter_udid: a0c0270ca9af9f3119bfb53f95813760caee4c1a
+  flutter_udid: 00c09e022fd527fd39fef97670b220f2ae8190e7
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
 
 PODFILE CHECKSUM: 54ab1ae9e8d4c5e62ac1cba034ff5bb2a562d876
 
