@@ -2,7 +2,7 @@ group 'de.gigadroid.flutterudid'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.8.22'
+    ext.kotlin_version = '2.1.0'
     repositories {
         google()
         mavenCentral()
@@ -29,7 +29,7 @@ android {
         namespace 'de.gigadroid.flutterudid'
     }
 
-    compileSdkVersion 35
+    compileSdkVersion flutter.compileSdkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
