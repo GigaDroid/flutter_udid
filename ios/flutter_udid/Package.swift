@@ -11,11 +11,15 @@ let package = Package(
   products: [
     .library(name: "flutter-udid", targets: ["flutter_udid"])
   ],
-  dependencies: [],
+  dependencies: [
+    .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", .upToNextMajor(from: "4.2.2")),
+  ],
   targets: [
     .target(
       name: "flutter_udid",
-      dependencies: [],
+      dependencies: [
+        .product(name: "KeychainAccess", package: "KeychainAccess")
+      ],
       resources: []
     )
   ]
