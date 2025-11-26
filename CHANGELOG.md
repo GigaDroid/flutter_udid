@@ -1,3 +1,6 @@
+## 4.1.1
+* Fix missing keychain dependency
+
 ## 4.1.0
 * Replace SAMKeychain with KeychainAccess for iOS and macOS
 * Update iOS deployment target to 13.0
