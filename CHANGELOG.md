@@ -1,3 +1,6 @@
+## 4.1.2
+* Update Kotlin version to 2.2.20
+
 ## 4.1.1
 * Fix missing keychain dependency
 
