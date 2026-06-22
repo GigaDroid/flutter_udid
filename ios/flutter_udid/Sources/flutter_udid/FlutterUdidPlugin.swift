@@ -3,6 +3,8 @@ import UIKit
 import KeychainAccess
 
 public class FlutterUdidPlugin: NSObject, FlutterPlugin {
+  private static let keychainService = "de.gigadroid.flutter_udid"
+  private static let keychainAccount = "udid"
 
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "flutter_udid", binaryMessenger: registrar.messenger())
@@ -20,35 +22,63 @@ public class FlutterUdidPlugin: NSObject, FlutterPlugin {
   }
 
   private func getUniqueDeviceIdentifierAsString(result: FlutterResult) {
-    let bundleName = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "flutter_udid"
-    let accountName = Bundle.main.bundleIdentifier ?? "com.default.app"
+    let keychain = Keychain(service: FlutterUdidPlugin.keychainService)
+      .synchronizable(false)
+      .accessibility(.afterFirstUnlockThisDeviceOnly)
 
-    // Use KeychainAccess with same structure as original SAMKeychain implementation
-    let keychain = Keychain(service: bundleName).synchronizable(false)
-
-    // Try to read existing UUID from keychain
-    if let applicationUUID = try? keychain.get(accountName), !applicationUUID.isEmpty {
-      result(applicationUUID)
+    do {
+      if let applicationUUID = try keychain.get(FlutterUdidPlugin.keychainAccount), !applicationUUID.isEmpty {
+        result(applicationUUID)
+        return
+      }
+    } catch {
+      result(FlutterError(code: "UNAVAILABLE",
+                         message: "UDID not available",
+                         details: "keychain_get_failed: \(error.localizedDescription)"))
       return
     }
 
-    // Generate new UUID if none exists
+    do {
+      if let migratedUUID = try self.migratedUniqueDeviceIdentifier(keychain: keychain) {
+        result(migratedUUID)
+        return
+      }
+    } catch {
+      result(FlutterError(code: "UNAVAILABLE",
+                         message: "UDID not available",
+                         details: "keychain_migration_failed: \(error.localizedDescription)"))
+      return
+    }
+
     guard let vendorId = UIDevice.current.identifierForVendor?.uuidString else {
       result(FlutterError(code: "UNAVAILABLE",
                          message: "UDID not available",
-                         details: nil))
+                         details: "identifierForVendor returned nil"))
       return
     }
 
-    // Save the new UUID to keychain
     do {
-      try keychain.set(vendorId, key: accountName)
+      try keychain.set(vendorId, key: FlutterUdidPlugin.keychainAccount)
       result(vendorId)
     } catch {
       result(FlutterError(code: "UNAVAILABLE",
                          message: "UDID not available",
-                         details: nil))
+                         details: "keychain_set_failed: \(error.localizedDescription)"))
     }
   }
-}
 
+  private func migratedUniqueDeviceIdentifier(keychain: Keychain) throws -> String? {
+    let legacyService = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "flutter_udid"
+    let legacyAccount = Bundle.main.bundleIdentifier ?? "com.default.app"
+    let legacyKeychain = Keychain(service: legacyService)
+      .synchronizable(false)
+      .accessibility(.afterFirstUnlockThisDeviceOnly)
+
+    guard let legacyUUID = try legacyKeychain.get(legacyAccount), !legacyUUID.isEmpty else {
+      return nil
+    }
+
+    try keychain.set(legacyUUID, key: FlutterUdidPlugin.keychainAccount)
+    return legacyUUID
+  }
+}

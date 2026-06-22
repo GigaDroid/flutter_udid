@@ -21,6 +21,10 @@ This provides an UDID using the format of the corresponding platform.
 | Windows  | `99A4D301-53F5-11CB-8CA0-9CA39A9E1F01` | BIOS UUID                                                                                                                                       |
 | Linux    | `1124435e065241dcae2241e9caab9a6c` | Machine ID                                                                                                                                      |
 
+### iOS Keychain availability
+
+On iOS, the UDID is stored in Keychain with `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`. This means it is available only after the user has unlocked the device once after reboot, including later background launches while the device is locked. Before the first unlock after reboot, requesting the UDID throws a `PlatformException`.
+
 To get a consistent formatting on all platforms use:
 
 ```
