@@ -1,8 +1,3 @@
-## 4.1.3
-* Store iOS and macOS UDIDs under a fixed Keychain service/account and migrate legacy entries
-* Declare KeychainAccess for the macOS Swift Package Manager target
-* Migrate Android Gradle setup for AGP 9 Kotlin compatibility
-
 ## 4.1.2
 * Update Kotlin version to 2.2.20
 
