@@ -1,3 +1,6 @@
+## 4.1.4
+* Fix Android builds on AGP 9+ by correcting the namespace and preserving Kotlin compilation when `android.builtInKotlin=false`
+
 ## 4.1.3
 * Store iOS and macOS UDIDs under a fixed Keychain service/account and migrate legacy entries
 * Declare KeychainAccess for the macOS Swift Package Manager target
