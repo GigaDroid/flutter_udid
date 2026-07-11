@@ -1,3 +1,6 @@
+## 4.1.5
+* Use the host application's Android Gradle Plugin version instead of pinning AGP in the plugin
+
 ## 4.1.4
 * Fix Android builds on AGP 9+ by correcting the namespace and preserving Kotlin compilation when `android.builtInKotlin=false`
 
