@@ -1,3 +1,6 @@
+## 4.1.6
+* Query WMI directly on Windows instead of relying on the deprecated WMIC command-line tool
+
 ## 4.1.5
 * Use the host application's Android Gradle Plugin version instead of pinning AGP in the plugin
 
