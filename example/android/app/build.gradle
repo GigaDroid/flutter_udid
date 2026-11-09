@@ -3,11 +3,6 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0] as int
-if (agpMajor < 9) {
-    apply plugin: 'kotlin-android'
-}
-
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
