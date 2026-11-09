@@ -4,8 +4,8 @@ version: 4.1.6
 homepage: https://github.com/GigaDroid/flutter_udid
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=3.10.0"
+  sdk: ^3.12.0
+  flutter: ">=3.44.0"
 
 dependencies:
   flutter:

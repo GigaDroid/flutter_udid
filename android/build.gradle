@@ -22,14 +22,6 @@ rootProject.allprojects {
 
 apply plugin: 'com.android.library'
 
-def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0] as int
-
-def builtInKotlinEnabled = (project.findProperty("android.builtInKotlin") ?: "true").toString().toBoolean()
-
-if (agpMajor < 9 || !builtInKotlinEnabled) {
-    apply plugin: 'kotlin-android'
-}
-
 android {
     if (project.android.hasProperty("namespace")) {
         namespace 'de.gigadroid.flutter_udid'
@@ -50,10 +42,8 @@ android {
     }
 }
 
-if (agpMajor < 9 || !builtInKotlinEnabled) {
-    kotlin {
-        compilerOptions {
-            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
-        }
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
     }
 }
