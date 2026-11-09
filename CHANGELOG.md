@@ -1,3 +1,8 @@
+## 4.2.0
+* Require Flutter 3.44+ and Dart 3.12+
+* Migrate the Android plugin to built-in Kotlin instead of applying the Kotlin Gradle Plugin
+* Add the FlutterFramework Swift Package Manager dependency for iOS and macOS
+
 ## 4.1.6
 * Query WMI directly on Windows instead of relying on the deprecated WMIC command-line tool
 
